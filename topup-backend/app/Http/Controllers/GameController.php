@@ -9,7 +9,7 @@ class GameController extends Controller
 {
     public function index()
     {
-        return Game::all();
+        return Game::all(); // Mengambil semua data game
     }
 
     public function store(Request $request)
@@ -20,23 +20,13 @@ class GameController extends Controller
             'price' => 'required|numeric',
         ]);
 
-        $game = Game::create($request->all());
-
+        $game = Game::create($request->all()); // Menyimpan game baru
         return response()->json($game, 201);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $game = Game::findOrFail($id);
-        $game->update($request->all());
-
-        return response()->json($game, 200);
     }
 
     public function destroy($id)
     {
-        Game::destroy($id);
-
+        Game::destroy($id); // Menghapus game berdasarkan ID
         return response()->json(['message' => 'Game deleted'], 200);
     }
 }
